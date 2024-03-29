@@ -2,24 +2,26 @@ import pandas as pd
 
 df = pd.read_csv('mtsamples.csv')
 
-a=0
+count=0
+MAXCOUNT = 300
+
 dict = {'input_text': [],
         'output_text': []}
 for index, row in df.iterrows():
     print(index, end='\n\n')
     dict['input_text'].append("DESCRIPTION:" + str(row.loc['description']) + 
-                              "MEDICAL_SPECIALITY:" + str(row.loc['medical_specialty']) +
-                            "TRANSCRIPTION:" + str(row.loc['transcription']) + 
+                            #"SAMPLE_NAME:" + str(row.loc['sample_name']) +
+                            #"TRANSCRIPTION:" + str(row.loc['transcription']) + 
                             "KEYWORDS:" + str(row.loc['keywords']))
-    dict['output_text'].append("SAMPLE_NAME:" + str(row.loc['sample_name']))
+    dict['output_text'].append("MEDICAL_SPECIALITY:" + str(row.loc['medical_specialty']))
     
     print(type(row))
     print()
-    if a==300:
+    if count==MAXCOUNT:
         break
-    a+=1
+    count+=1
 csvDf = pd.DataFrame(dict)
-csvDf.to_csv('train.csv', index=False)
+csvDf.to_csv('decsription_to_medical_speciality.csv', index=False)
 
 """
 ['input_text', 'output_text']
