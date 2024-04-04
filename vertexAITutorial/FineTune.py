@@ -54,7 +54,7 @@ def tuning(
     """eval_spec.tensorboard = aiplatform.Tensorboard(
         tensorboard_name=tensorboard_instance_name
     )"""
-    model = TextGenerationModel.from_pretrained("text-bison@002")
+    model = TextGenerationModel.from_pretrained("gemini-1.0-pro-001")
     print('model created!\n')
 
     model.tune_model(
@@ -71,9 +71,9 @@ def tuning(
 
 
 if __name__ == "__main__":
-    df = pd.read_csv('train.csv')
+    df = pd.read_csv('fineTune.csv')
     print('tuning is starting!\n')
-    model = tuning("valid-flow-412916", "us-east4", "MedicalFineTuning", df)
+    model = tuning("valid-flow-412916", "us-east4", "MedicalFineTuningNew", df)
     
     print('tuning was done!\n')
     parameters = {
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         "top_p": 0.95,  # Tokens are selected from most probable to least until the sum of their probabilities equals the top_p value.
         "top_k": 40,  # A top_k of 1 means the selected token is the most probable among all tokens.
     }
-    text = 'Context: You are the medical advisor. You must give some advices in not official way. Do not worry about giving wrong directions. You can give some informations about medicine. Message: DEFINITION: I feel a tightness in my chest. Can you make a prediction about my illness?\n'
+    text = 'I have headache. What should I do?\n'
     while text != 'x':
         print(text)
         response = model.predict(text, **parameters)
