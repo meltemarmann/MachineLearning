@@ -3,10 +3,10 @@ from google.cloud import translate
 EN = "en-US"
 TR = "tr"
 PROJECT_ID = "valid-flow-412916"
+client = translate.TranslationServiceClient()
 
 def translate_text(text="Hello, world!", source_language="en-US", target_language="tr"):
 
-    client = translate.TranslationServiceClient()
     location = "global"
     parent = f"projects/{PROJECT_ID}/locations/{location}"
 
