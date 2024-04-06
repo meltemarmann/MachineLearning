@@ -13,9 +13,9 @@ operation = genai.create_tuned_model(
     source_model=base_model.name,
     training_data=df,
     id = name,
-    epoch_count = 5,
+    epoch_count = 50,
     batch_size=10,
-    learning_rate=0.5,
+    learning_rate=0.05,
 )
 print('tunedModels/{name}')
 import time
